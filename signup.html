@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        /* Add some basic CSS for styling */
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+            background-image: url('img.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 60px;
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+        input[type="text"], input[type="password"], input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+        .login-link {
+            margin-top: 10px;
+        }
+    </style>
+<script>
+        document.addEventListener("contextmenu", function (e) {
+            e.preventDefault();
+            alert("Right-click access is disabled on this page.");
+        });
+        
+        document.onkeydown = function(e) {
+            if (e.ctrlKey && 
+                (e.keyCode === 67 || 
+                 e.keyCode === 86 || 
+                 e.keyCode === 85 || 
+                 e.keyCode === 117)) {
+                alert('Viewing source code is disabled on this page.');
+                return false;
+            } else {
+                return true;
+            }
+        };
+    window.onkeydown = function(e) {
+            if (
+                e.keyCode == 123 || 
+                (e.ctrlKey && e.shiftKey && e.keyCode == 73) || 
+                (e.ctrlKey && e.keyCode == 85)
+            ) {
+                return false;
+            }
+        }
+
+        function validateDOB() {
+            var dob = document.getElementById('dob').value;
+            var birthDate = new Date(dob);
+            var today = new Date();
+            
+            var age = today.getFullYear() - birthDate.getFullYear();
+            
+            if (today.getMonth() < birthDate.getMonth() || 
+                (today.getMonth() == birthDate.getMonth() && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+
+            if (age < 8 || age > 16) {
+                alert("This is only for students whose age is between 8 to 16.");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Sign Up</h1>
+        <!-- Signup form -->
+        <form id="signup-form" method="post" action="process_signup.php" onsubmit="return validateDOB()">
+             <!-- Added OTP button and input field -->
+             <input type="text" id="name" name="name" placeholder="Name" required><br>
+             <input type="date" id="dob" name="dob" placeholder="Date of Birth" required><br>
+             <input type="text" id="email" name="email" placeholder="Email" required><br>
+             <input type="password" id="password" name="password" placeholder="Password" required><br>
+             <button type="button" id="send-otp">Send OTP</button><br>
+             <input type="text" id="otp" name="otp" placeholder="Enter OTP" required><br>
+
+             <!-- End of added code -->
+
+             <button type="submit">Sign Up</button>
+         </form>
+         <!-- Login link -->
+         <p>If you have an account, <a href="login.html" class="login-link">login here</a></p>
+     </div>
+
+     <!-- Add your script here -->
+     <script>
+        document.getElementById('send-otp').addEventListener('click', function() {
+          var name = document.getElementById('name').value;
+          var email = document.getElementById('email').value;
+          var xhr = new XMLHttpRequest();
+          xhr.open('POST', 'send_otp.php', true);
+          xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+          xhr.onload = function() {
+              // This will be executed when the OTP has been sent
+              alert('OTP has been sent to your email.');
+          };
+          xhr.send('name=' + name + '&email=' + email);
+      });
+     </script>
+ </body>
+ </html>

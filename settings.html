@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            background-image: url('https://images.pexels.com/photos/235985/pexels-photo-235985.jpeg?auto=compress&cs=tinysrgb&w=600');
+            background-size: cover;           
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .profile-details, .account-details {
+            flex: 1;
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .profile-logo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 0 auto 10px; /* Center the image horizontally */
+            display: block;
+        }
+
+        .profile-details p, .account-details p {
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        .edit-button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .edit-button:hover {
+            background-color: #0056b3;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .change-image-button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .change-image-button:hover {
+            background-color: #0056b3;
+        }
+        .back-button-box {
+            position: absolute;
+            bottom: 20px; /* Adjust the distance from the bottom as needed */
+            left: 10px; /* Adjust the distance from the left as needed */
+            background-color: white; /* Semi-transparent white background */
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Settings</h1>
+    <div class="container">
+        <!-- Profile Details -->
+        <div class="profile-details">
+            <img id="profileImage" src="https://www.becomingminimalist.com/wp-content/uploads/2011/02/s-becker-feature.jpg" alt="Profile Logo" class="profile-logo">
+            <p>Name: Jhon</p>
+            <input type="file" class="file-input" id="profileImageInput" accept="image/*" onchange="changeProfileImage(event)">
+            <label for="profileImageInput" class="change-image-button">Change Profile Image</label>
+            <button class="edit-button" onclick="toggleProfileEdit()">Edit Profile Details</button>
+        </div>
+
+        <!-- Account Details -->
+        <div class="account-details">
+            <p>Email: rajivchaitanyaa143@gmail.com</p>
+            <button class="edit-button" onclick="toggleAccountEdit()">Edit Account Details</button>
+        </div>
+    </div>
+
+    <!-- Profile Edit Form (Initially Hidden) -->
+    <form id="profileEditForm" style="display: none;">
+        <label for="profileName">New Profile Name:</label>
+        <input type="text" id="profileName" name="profileName" placeholder="Enter new profile name" required>
+        <input type="submit" value="Save">
+    </form>
+
+    <!-- Account Edit Form (Initially Hidden) -->
+    <form id="accountEditForm" style="display: none;">
+        <label for="email">New Email:</label>
+        <input type="email" id="email" name="email" placeholder="Enter new email" required>
+
+        <label for="password">New Password:</label>
+        <input type="password" id="password" name="password" placeholder="Enter new password" required>
+        
+        <input type="submit" value="Save">
+    </form>
+
+    <script>
+        function toggleProfileEdit() {
+            var profileEditForm = document.getElementById("profileEditForm");
+            profileEditForm.style.display = profileEditForm.style.display === "none" ? "block" : "none";
+        }
+
+        function toggleAccountEdit() {
+            var accountEditForm = document.getElementById("accountEditForm");
+            accountEditForm.style.display = accountEditForm.style.display === "none" ? "block" : "none";
+        }
+
+        function changeProfileImage(event) {
+            var profileImage = document.getElementById("profileImage");
+            var fileInput = document.getElementById("profileImageInput");
+
+            if (fileInput.files && fileInput.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    profileImage.src = e.target.result;
+                };
+
+                reader.readAsDataURL(fileInput.files[0]);
+            }
+        }
+    </script>
+    <div class="back-button-box">
+        <a href="home.html">Back</a> <!-- Add the "Back" button with a link to another page -->
+    </div>
+
+</body>
+</html>
