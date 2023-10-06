@@ -1,0 +1,178 @@
+<?php
+session_start(); // Start or resume the session
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://img.freepik.com/premium-photo/abstract-pinkpurple-background-with-neon-lines-fog-synthwave_856565-84.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .profile-info {
+            display: flex;
+            align-items: center;
+        }
+
+        header img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        .profile-details {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 300px;
+            background-color: #f4f4f4;
+            padding: 20px;
+            overflow-y: scroll;
+            text-align: center;
+        }
+
+        .profile-details img {
+            display: block;
+            margin: 0 auto 10px;
+            width: 50px;
+            height: 50px;
+        }
+
+        .back-button {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background-color: #f00;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .module {
+            background-color: #f4f4f4;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .module:hover {
+            background-color: #ddd;
+        }
+
+        .logout-button {
+            background-color: #f00;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .logout-button:hover {
+            background-color: #d00;
+        }
+
+        .profile-details .leaderboard {
+            display: none;
+            padding-top: 10px;
+            border-top: 1px solid #ccc;
+        }
+
+        .profile-details .leaderboard a {
+            text-decoration: none;
+            color: #333;
+            display: block;
+            padding: 5px 0;
+        }
+
+        .profile-details .leaderboard a:hover {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="profile-info">
+            <img src="https://www.becomingminimalist.com/wp-content/uploads/2011/02/s-becker-feature.jpg" alt="Profile Image" onclick="toggleProfileDetails()">
+            <h1><?php echo $_SESSION['name']; ?></h1>
+        </div>
+        <button class="logout-button" onclick="window.location.href='login.html'">Logout</button>
+    </header>
+
+    <div class="container">
+        <h2 align="center">Welcome to your profile</h2>
+        
+        <div class="module" onclick="window.location.href='module1.html'">
+            <h3>TASK-1</h3>
+        </div>
+    </div>
+
+    <!-- Profile Details Section -->
+    <div class="profile-details" id="profileDetails">
+        <img src="https://www.becomingminimalist.com/wp-content/uploads/2011/02/s-becker-feature.jpg" alt="Profile Image">
+        <h2>Profile Details</h2>
+        <p>Name: <?php echo $_SESSION['name']; ?></p>
+        <p>Age: <?php echo $_SESSION['age']; ?></p>
+        <p>Email: <?php echo $_SESSION['email']; ?></p>
+
+        <p><a href="terms.html">Terms and Conditions</a></p>
+        <p><a href="settings.html">Settings</a></p>
+        <p><a href="javascript:void(0);" onclick="toggleLeaderboard()">Leaderboard</a></p>
+        <div class="leaderboard" id="leaderboardOptions">
+            <a href="new2.html">Quiz</a>
+            <a href="new3.html">Virtual World</a>
+        </div>
+        <button class="back-button" onclick="toggleProfileDetails()">Back</button>
+    </div>
+
+    <script>
+        function toggleProfileDetails() {
+            var profileDetails = document.getElementById("profileDetails");
+            if (profileDetails.style.display === "none" || profileDetails.style.display === "") {
+                profileDetails.style.display = "block";
+            } else {
+                profileDetails.style.display = "none";
+            }
+        }
+        function toggleLeaderboard() {
+            var leaderboardOptions = document.getElementById("leaderboardOptions");
+            if (leaderboardOptions.style.display === "none" || leaderboardOptions.style.display === "") {
+                leaderboardOptions.style.display = "block";
+            } else {
+                leaderboardOptions.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
