@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quiz</title>
+    <style>
+        body {
+            text-align: center;
+        }
+
+        .quiz-container {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        .question {
+            text-align: left;
+            margin-bottom: 10px;
+        }
+
+        .answer {
+            text-align: left;
+            margin-bottom: 5px;
+        }
+
+        .correct {
+            color: green;
+        }
+
+        .incorrect {
+            color: red;
+        }
+
+        /* Style the submit button */
+        input[type="submit"] {
+            background-color: green;
+            color: white;
+            font-size: 1.2em; /* Enlarge the font size */
+            padding: 10px 20px; /* Add padding for better appearance */
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Enlarge radio buttons */
+        input[type="radio"] {
+            transform: scale(1.5);
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Quiz Questions</h1>
+    <div class="quiz-container">
+        <form id="quizForm">
+            <ol>
+                <li class="question">
+                    <label>1. What Is the Purpose of the Video?</label><br>
+                    <input type="radio" name="q1" value="A"> a. Right to Education<br>
+                    <input type="radio" name="q1" value="B"> b. Entertain child<br>
+                    <input type="radio" name="q1" value="C"> c. Games<br>
+                    <input type="radio" name="q1" value="D"> d. Friends<br>
+                    <span id="q1-feedback"></span>
+                </li>
+                <li class="question">
+                    <label>2. For What Age This Right is Permitted?</label><br>
+                    <input type="radio" name="q2" value="A"> a. 6-10<br>
+                    <input type="radio" name="q2" value="B"> b. 8-12<br>
+                    <input type="radio" name="q2" value="C"> c. 8-16<br>
+                    <input type="radio" name="q2" value="D"> d. 8-14<br>
+                    <span id="q2-feedback"></span>
+                </li>
+                <li class="question">
+                    <label>3. Is this Useful to Gain Knowledge About Rights?</label><br>
+                    <input type="radio" name="q3" value="A"> A. Yes<br>
+                    <input type="radio" name="q3" value="B"> b. No<br>
+                    <span id="q3-feedback"></span>
+                </li>
+                <li class="question">
+                    <label>4. What Is the Main Aim In the video?</label><br>
+                    <input type="radio" name="q4" value="A"> a. No Labour<br>
+                    <input type="radio" name="q4" value="B"> b. Education<br>
+                    <input type="radio" name="q4" value="C"> c. No Child labour<br>
+                    <input type="radio" name="q4" value="D"> d. b and c only<br>
+                    <span id="q4-feedback"></span>
+                </li>
+                <li class="question">
+                    <label>5. Working Is important For Children at age 8-16?</label><br>
+                    <input type="radio" name="q5" value="A"> a. True<br>
+                    <input type="radio" name="q5" value="B"> b. False<br>
+                    <span id="q5-feedback"></span>
+                </li>
+                <li class="question">
+                    <label>6. What Is Important For Children At age 8-16?</label><br>
+                    <input type="radio" name="q6" value="A"> a. Protection<br>
+                    <input type="radio" name="q6" value="B"> b. Education<br>
+                    <input type="radio" name="q6" value="C"> c. Freedom<br>
+                    <input type="radio" name="q6" value="D"> d. All<br>
+                    <span id="q6-feedback"></span>
+                </li>
+                <li class="question">
+                    <label>7. What should we do When a child Working as a Labour?</label><br>
+                    <input type="radio" name="q7" value="A"> a. Inform parents<br>
+                    <input type="radio" name="q7" value="B"> b. Tell them not to work<br>
+                    <input type="radio" name="q7" value="C"> c. Call child welfare<br>
+                    <input type="radio" name="q7" value="D"> d. All<br>
+                    <span id="q7-feedback"></span>
+                </li>
+                <li class="question">
+                    <label>8. When will "The Life" changes from Poverty to knowledge?</label><br>
+                    <input type="radio" name="q8" value="A"> a. Being Educated<br>
+                    <input type="radio" name="q8" value="B"> b. Working as a labour<br>
+                    <input type="radio" name="q8" value="C"> c. Playing games<br>
+                    <input type="radio" name="q8" value="D"> d. Being uneducated<br>
+                    <span id="q8-feedback"></span>
+                </li>
+                <li class="question">
+                    <label>9. Why is child labor harmful?</label><br>
+                    <input type="radio" name="q9" value="A"> A. It helps children develop important life skills<br>
+                    <input type="radio" name="q9" value="B"> B. It allows children to earn money for themselves<br>
+                    <input type="radio" name="q9" value="C"> C. It can lead to physical and emotional harm, and it often prevents children from going to school<br>
+                    <input type="radio" name="q9" value="D"> D. It provides children with valuable work experience<br>
+                    <span id="q9-feedback"></span>
+                </li>
+                <li class="question">
+                    <label>10. What does the Education teach us?</label><br>
+                    <input type="radio" name="q10" value="A"> a. Helps you make friends<br>
+                    <input type="radio" name="q10" value="B"> b. Teaches you how to play sports<br>
+                    <input type="radio" name="q10" value="C"> c. Provides you with knowledge and skills<br>
+                    <input type="radio" name="q10" value="D"> d. Helps you become a famous actor<br>
+                    <span id="q10-feedback"></span>
+                </li>
+            </ol>
+            <input type="submit" value="Submit" id="submitButton" disabled>
+            <p id="errorText" style="color: red;"></p> <!-- Error message for unanswered questions -->
+        </form>
+
+        <div id="results"></div>
+    </div>
+
+    <script>
+        const correctAnswers = ["A", "C", "A", "D", "B", "D", "D", "A", "C", "C"];
+        let submitted = false; // To track whether the quiz has been submitted
+
+        const quizForm = document.getElementById('quizForm');
+        const submitButton = document.getElementById('submitButton');
+        const errorText = document.getElementById('errorText');
+
+        quizForm.addEventListener('change', function () {
+            if (!submitted) {
+                const formData = new FormData(this);
+                let answeredQuestions = 0;
+
+                for (let i = 1; i <= correctAnswers.length; i++) {
+                    const userAnswer = formData.get(`q${i}`);
+                    if (userAnswer) {
+                        answeredQuestions++;
+                    }
+                }
+
+                if (answeredQuestions === correctAnswers.length) {
+                    submitButton.removeAttribute('disabled');
+                    errorText.textContent = ''; // Clear any error message
+                } else {
+                    submitButton.setAttribute('disabled', 'disabled');
+                    errorText.textContent = 'Please answer all questions';
+                }
+            }
+        });
+
+        quizForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            if (!submitted) {
+                const formData = new FormData(this);
+                let score = 0;
+
+                for (let i = 1; i <= correctAnswers.length; i++) {
+                    const userAnswer = formData.get(`q${i}`);
+                    const feedbackSpan = document.getElementById(`q${i}-feedback`);
+                    if (userAnswer === correctAnswers[i - 1]) {
+                        score++;
+                        feedbackSpan.textContent = 'Correct';
+                        feedbackSpan.classList.add('correct');
+                        feedbackSpan.classList.remove('incorrect');
+                    } else {
+                        feedbackSpan.textContent = 'Incorrect';
+                        feedbackSpan.classList.add('incorrect');
+                        feedbackSpan.classList.remove('correct');
+                    }
+                }
+
+                const resultsDiv = document.getElementById('results');
+                resultsDiv.innerHTML = `You got ${score} out of ${correctAnswers.length} questions correct.`;
+
+                submitted = true; // Mark the quiz as submitted
+                setTimeout(function() {
+                    window.location.href = 'virtualworld1.html'; // Replace 'nextpage.html' with the actual URL of the next page
+                }, 2000); 
+            }
+        });
+    </script>
+</body>
+</html>

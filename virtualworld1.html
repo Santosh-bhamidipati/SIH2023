@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Leaderboard</title>
+    <style> 
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            text-align: center;
+            background-image: url("https://img.freepik.com/premium-photo/blue-paper-texture-cardboard-sheet-copy-space_116441-19559.jpg"); /* Replace 'your-image-url.jpg' with the actual URL of your background image */
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        
+        #leaderboard {
+            width: 300px;
+            margin: 20px auto;
+            text-align: left;
+            font-family: "georgia", serif; /* Change font style for leaderboard */
+            border: 2px solid #4CAF50; /* Add border around the leaderboard */
+           
+        }
+
+        #leaderboard th, #leaderboard td {
+            text-align: center;
+            padding: 12px;
+    
+        }
+
+        #leaderboard th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        /* Increase font size for usernames and points */
+        #username, #points {
+            font-size: 25px;
+            font-family: "palatino", serif; /* Change font style for usernames */
+            border: 1px solid #4CAF50; /* Add border around usernames and points */
+            padding: 10px; /* Add padding to usernames and points */
+            background-color: white; /* Background color for usernames */
+        }
+
+        #virtual-button {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #countdown {
+            font-size: 18px;
+            color: white; /* Set the text color to white */
+        }
+        /* Increase the size of the button */
+        #virtual-button button {
+            font-size: 26px;
+        }
+            
+    </style>
+</head>
+<body>
+    <h1>Leaderboard</h1>
+    <table id="leaderboard">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Points</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td id="username">User</td>
+                <td id="points">10</td>
+            </tr>
+            <tr>
+                <td id="username">User</td>
+                <td id="points">9</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div id="virtual-button">
+        <button onclick="startTimer()">Enter Virtual World</button>
+        <div id="countdown"></div>
+    </div>
+
+    <script>
+        let countdown;
+
+        function updatePoints(points) {
+            const pointsElement = document.getElementById("points");
+            pointsElement.textContent = points;
+        }
+
+        function addPoints() {
+            const randomPoints = Math.floor(Math.random() * 10) + 1;
+            const currentPoints = parseInt(document.getElementById("points").textContent);
+            const newPoints = currentPoints + randomPoints;
+
+            updatePoints(newPoints);
+        }
+
+        function startTimer() {
+            clearInterval(countdown);
+            let secondsRemaining = 10;
+            const countdownElement = document.getElementById("countdown");
+
+            countdown = setInterval(function() {
+                countdownElement.textContent = `Redirecting in ${secondsRemaining} seconds...`;
+                secondsRemaining--;
+
+                if (secondsRemaining < 0) {
+                    clearInterval(countdown);
+                    countdownElement.textContent = "";
+                    enterVirtualWorld();
+                }
+            }, 1000);
+        }
+
+        function enterVirtualWorld() {
+            window.location.href = "feed.html";
+        }
+
+        window.onload = addPoints;
+    </script>
+</body>
+</html>
+

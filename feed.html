@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Game Feedback</title>
+    <style>
+        body {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Feedback</h1>
+    <button onclick="showFeedbackForm()">Give Feedback</button>
+
+    <!-- Your quiz game content goes here -->
+    <div id="quiz">
+        <!-- Quiz questions and answers go here -->
+    </div>
+
+    <!-- Feedback form -->
+    <div id="feedback-form" style="display: none;">
+        <h2>Feedback</h2>
+        <p>please provide your feedback it is very valuable to give you better experience:</p>
+        <form id="feedback" action="#" method="post">
+            <label for="name">Your Name (optional):</label>
+            <input type="text" id="name" name="name">
+
+            <label for="feedback">Feedback:</label>
+            <textarea id="feedback" name="feedback" rows="1" cols="50" required></textarea>
+
+            <input type="submit" value="Submit Feedback">
+        </form>
+    </div>
+     <!-- Thank you message -->
+     <div id="thank-you" style="display: none;">
+        <h2>Thank You!</h2>
+        <p>Thank you for your feedback.</p>
+        <button onclick="redirectToRatingPage()">Rate Us</button>
+    </div>
+    <script>
+        // JavaScript to show the feedback form and thank you message
+        function showFeedbackForm() {
+            document.getElementById("quiz").style.display = "none";
+            document.getElementById("feedback-form").style.display = "block";
+        }
+
+        // JavaScript to show the thank you message after submitting feedback
+        document.getElementById("feedback").addEventListener("submit", function (event) {
+            event.preventDefault(); // Prevent the form from actually submitting (for demo purposes)
+
+            // Hide the feedback form
+            document.getElementById("feedback-form").style.display = "none";
+
+            // Show the thank you message
+            document.getElementById("thank-you").style.display = "block";
+        });
+        function redirectToRatingPage() {
+            // Replace 'rating.html' with the actual URL of your rating page
+            window.location.href = "rating.html";
+        }
+    </script>
+
+    <!-- Simulate quiz completion -->
+ 
+</body>
+</html>

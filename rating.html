@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Left to Right Star Rating System</title>
+<style>
+  .rating {
+    display: inline-block;
+    direction: rtl;
+    text-align: center;
+  }
+
+  .rating input {
+    display: none;
+  }
+
+  .rating label {
+    font-size: 30px;
+    color: #ddd;
+    cursor: pointer;
+    display: inline-block;
+  }
+
+  .rating label:before {
+    content: '★';
+  }
+
+  .rating input:checked ~ label {
+    color: #f7d000;
+  }
+  body{
+    text-align: center;
+  }
+  .skip-button-box {
+            position: absolute;
+            bottom: 20px; /* Adjust the distance from the bottom as needed */
+            right: 10px; /* Adjust the distance from the left as needed */
+            background-color: white; /* Semi-transparent white background */
+            padding: 10px;
+            border-radius: 5px;
+        }
+</style>
+</head>
+<body>
+  <div class="rating">
+    <input type="radio" id="star1" name="rating" value="1"><label for="star1"></label>
+    <input type="radio" id="star2" name="rating" value="2"><label for="star2"></label>
+    <input type="radio" id="star3" name="rating" value="3"><label for="star3"></label>
+    <input type="radio" id="star4" name="rating" value="4"><label for="star4"></label>
+    <input type="radio" id="star5" name="rating" value="5"><label for="star5"></label>
+    <p>Rating</p>
+    <button onclick="redirectToHomePage()">Submit</button>
+  </div>
+  <script>
+    function redirectToHomePage() {
+            // Replace 'rating.html' with the actual URL of your rating page
+            window.location.href = "home.html";
+        }
+  </script>
+   <div class="skip-button-box">
+    <a href="home.html">Skip</a> <!-- Add the "Back" button with a link to another page -->
+</div>
+</body>
+</html>
